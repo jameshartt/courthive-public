@@ -95,7 +95,9 @@ export function renderVenues(venues: any[] | undefined, eventInfo?: any[]): HTML
 
   for (const venue of venues) {
     const cardData = mapVenueToCardData(venue, { sport });
-    const card = buildVenueCard(cardData);
+    // No OpenStreetMap preview: the iframe would load a third-party host (openstreetmap.org) in the visitor's
+    // browser. Venues with coordinates fall through to the court SVG instead.
+    const card = buildVenueCard(cardData, { showMap: false });
     grid.appendChild(card);
 
     const websiteUrl = findWebsite(venue);

@@ -10,6 +10,22 @@
     <title>Public</title>
   </head>
   <body>
+    <!-- Club-neutral bundle: every service address is a path on the host that
+         serves this page, so one build works under any hostname and never
+         falls back to courthive.net. The services read window.dev before
+         their localhost / courthive.net fallbacks. -->
+    <script>
+      (function () {
+        var api = location.origin + '/api/courthive';
+        window.dev = window.dev || {
+          baseURL: api,
+          authURL: api,
+          amsURL: api + '/ams',
+          declarationsURL: api + '/declarations',
+          queryBaseURL: api + '/query',
+        };
+      })();
+    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

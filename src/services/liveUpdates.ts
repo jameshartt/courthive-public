@@ -66,9 +66,13 @@ export function connectAndJoinRoom(tournamentId: string): void {
   }
 
   if (!socket) {
-    const serverUrl = getServerUrl();
+    // The REST base may carry a proxy path prefix (e.g. /api/courthive); the Socket.IO namespace is the URL's
+    // path, so connect to the origin alone (the proxy routes /socket.io/ to the server).
+    const serverUrl = new URL(getServerUrl(), globalThis.location.href).origin;
     console.log('[liveUpdates] connecting to', `${serverUrl}/public`);
     socket = io(`${serverUrl}/public`, {
+      // Long-polling only: the WebSocket upgrade fails behind an HTTP/2 reverse proxy (Caddy).
+      transports: ['polling'],
       reconnectionDelay: 1000,
       reconnectionAttempts: Infinity,
       timeout: 20000,

@@ -66,8 +66,10 @@ export function connectHiveIDSocket(): Socket | undefined {
   const session = readHiveIDSession();
   if (!session?.token) return undefined;
   if (socket?.connected) return socket;
-  const url = `${getCfsBaseUrl()}/hiveid`;
+  // Origin only: a proxy path prefix in the CFS base would otherwise become part of the namespace (see liveUpdates).
+  const url = `${new URL(getCfsBaseUrl(), globalThis.location.href).origin}/hiveid`;
   socket = io(url, {
+    transports: ['polling'],
     reconnectionDelay: 1000,
     reconnectionAttempts: Infinity,
     timeout: 20000,
