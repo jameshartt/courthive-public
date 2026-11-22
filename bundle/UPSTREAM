@@ -1,0 +1,9 @@
+# The pinned upstream base of this bundle branch (sourced by bundle/build.sh and
+# the bundle-image workflow). Change it only when the branch deliberately moves
+# to a new upstream base; see BUNDLE.md.
+UPSTREAM_REPO=https://github.com/CourtHive/courthive-public
+UPSTREAM_BRANCH=master
+# release 1.23.7 (#770)
+UPSTREAM_COMMIT=83c88da90cba5b78555851b1fdb43a6809188d83
+FORK_REPO=https://github.com/jameshartt/courthive-public
+IMAGE=ghcr.io/jameshartt/courthive-public

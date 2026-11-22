@@ -1,0 +1,22 @@
+# Bundle image build context (see BUNDLE.md)
+.git
+node_modules
+**/node_modules
+dist
+build
+coverage
+test-results
+playwright-report
+e2e/test-results
+e2e/playwright-report
+storybook-static
+.eslintcache
+eslint-report.json
+*.log
+# Local env files never go into an image; .env.production is tracked and used.
+.env
+.env.local
+.env.*.local
+backups
+# Development-only env (vite --mode production never reads it).
+.env.development

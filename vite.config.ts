@@ -9,6 +9,8 @@ import { version as pkgVersion } from './package.json';
 // page on courthive.net fetches this to display the currently-deployed
 // courthive-public build. Same shape as TMX + courthive-console.
 const BUILD_COMMIT = (() => {
+  // A container build has no .git: the bundle Dockerfile passes the commit in.
+  if (process.env.BUILD_COMMIT) return process.env.BUILD_COMMIT;
   try {
     return execSync('git rev-parse --short HEAD').toString().trim();
   } catch {
